@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Suitmedia App</string>
+    <string name="insert_name">Masukkan Nama</string>
+    <string name="next">NEXT</string>
+    <string name="namefirst">Nama : </string>
+    <string name="nametxt">Joni Joni</string>
+    <string name="txtEventName">Event Name</string>
+    <string name="txtEventDate">Event Date</string>
+    <string name="guestToolbar">Guest</string>
+    <string name="eventToolbar">Event</string>
+</resources>
