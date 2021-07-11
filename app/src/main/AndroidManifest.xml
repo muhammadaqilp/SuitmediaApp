@@ -4,6 +4,10 @@
     package="com.example.suitmediaapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
     <application
         android:icon="@mipmap/ic_launcher"
@@ -13,6 +17,11 @@
         android:theme="@style/Theme.SuitmediaApp"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/API_KEY"/>
+
         <activity android:name=".activity.MainActivity"></activity>
         <activity android:name=".activity.EventActivity" />
         <activity android:name=".activity.GuestActivity" />
