@@ -67,11 +67,25 @@ class GuestActivity : AppCompatActivity(), ListGuestAdapter.OnGuestClickCallback
     }
 
     override fun onGuestClicked(data: GuestItem) {
+
+        val phone = checkBirthDate(data)
+        val isPrime = checkMonth(data)
+
+        val primeMonth = (isPrime)
+
+        val intent = Intent()
+        intent.putExtra(HomeActivity.GUEST_STRING, data.name)
+        setResult(HomeActivity.GUEST_ACTIVITY, intent)
+        Toast.makeText(this, "$phone and $primeMonth", Toast.LENGTH_SHORT).show()
+        finish()
+
+    }
+
+    private fun checkBirthDate(data: GuestItem): String {
         val birthDate = data.birthdate.toString()
+        val date = birthDate.slice(8..9).toInt()
 
-        val date = birthDate.drop(7).toInt()
-
-        val message = if (date % 2 == 0 && date % 3 == 0) {
+        return if (date % 2 == 0 && date % 3 == 0) {
             "iOS"
         } else if (date % 3 == 0) {
             "Android"
@@ -80,13 +94,23 @@ class GuestActivity : AppCompatActivity(), ListGuestAdapter.OnGuestClickCallback
         } else {
             "Feature Phone"
         }
+    }
 
-        val intent = Intent()
-        intent.putExtra(HomeActivity.GUEST_STRING, data.name)
-        setResult(HomeActivity.GUEST_ACTIVITY, intent)
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-        finish()
+    private fun checkMonth(data: GuestItem): String {
 
+        val birthMonth = data.birthdate.toString()
+        val month = birthMonth.slice(5..6).toInt()
+
+        if (month <= 1) {
+            return "Not Prime"
+        } else {
+            for (i in 2 until month) {
+                if (month % i === 0) {
+                    return "Not Prime"
+                }
+            }
+        }
+        return "Is Prime"
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
