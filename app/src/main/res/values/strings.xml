@@ -8,4 +8,5 @@
     <string name="txtEventDate">Event Date</string>
     <string name="guestToolbar">Guest</string>
     <string name="eventToolbar">Event</string>
+    <string name="checkPalindrome">Check Palindrome</string>
 </resources>
