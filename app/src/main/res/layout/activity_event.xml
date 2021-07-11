@@ -7,20 +7,44 @@
     android:orientation="vertical"
     tools:context=".activity.EventActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/detailToolbar"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/c8"
-        app:titleTextColor="@color/white"
-        android:theme="@style/ToolbarColoredBackArrow"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/white"
+            android:minHeight="?attr/actionBarSize"
+            app:collapseIcon="@drawable/backarticle_normal"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/backarticle_normal"
+            app:title="@string/eventToolbar"
+            app:titleMarginEnd="40dp"
+            app:titleTextAppearance="@style/TitleToolbar"
+            app:titleTextColor="@color/gold" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_below="@id/toolbar"
+            android:background="@drawable/line_actionbar" />
+    </RelativeLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/containerMap"
+        android:visibility="gone"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvEvent"
-        android:layout_margin="@dimen/item_margin_default"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:listitem="@layout/item_list_event"/>
+        android:layout_margin="@dimen/item_margin_default"
+        tools:listitem="@layout/item_list_event" />
 
 </LinearLayout>

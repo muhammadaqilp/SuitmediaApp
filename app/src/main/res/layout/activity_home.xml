@@ -37,7 +37,7 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnEvent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -46,17 +46,17 @@
         android:layout_marginRight="@dimen/item_margin_default"
         android:text="Pilih Event"
         android:textAllCaps="false"
-        android:backgroundTint="@color/c7"
+        android:background="@drawable/ripple_color_main"
         android:textSize="@dimen/text_size_medium" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnGuest"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/item_margin_default"
         android:text="Pilih Guest"
         android:textAllCaps="false"
-        android:backgroundTint="@color/c7"
+        android:background="@drawable/ripple_color_main"
         android:textSize="@dimen/text_size_medium" />
 
 </LinearLayout>

@@ -1,7 +1,10 @@
 package com.example.suitmediaapp.activity
 
+import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
@@ -13,6 +16,14 @@ import com.example.suitmediaapp.data.model.GuestItem
 import com.example.suitmediaapp.data.remote.ServiceBuilder
 import com.example.suitmediaapp.data.remote.UserApiClient
 import com.example.suitmediaapp.databinding.ActivityGuestBinding
+import com.example.suitmediaapp.db.DatabaseContract
+import com.example.suitmediaapp.db.GuestHelper
+import com.example.suitmediaapp.db.helper.MappingHelper
+import kotlinx.android.synthetic.main.activity_guest.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -20,6 +31,7 @@ import retrofit2.Response
 class GuestActivity : AppCompatActivity(), ListGuestAdapter.OnGuestClickCallback {
 
     private lateinit var binding: ActivityGuestBinding
+    private lateinit var guestHelper: GuestHelper
     private var list: ArrayList<GuestItem> = arrayListOf()
     private val request = ServiceBuilder.buildService(UserApiClient::class.java)
     private val listGuestAdapter = ListGuestAdapter(list, this)
@@ -38,8 +50,40 @@ class GuestActivity : AppCompatActivity(), ListGuestAdapter.OnGuestClickCallback
         binding.rvGuest.layoutManager = GridLayoutManager(this, 2)
         binding.rvGuest.adapter = listGuestAdapter
 
-        showData()
+        cacheData()
 
+        swipeRefresh()
+    }
+
+    private fun cacheData() {
+        guestHelper = GuestHelper.getInstance(applicationContext)
+        guestHelper.open()
+
+        CoroutineScope(Dispatchers.Main).launch(Dispatchers.Main) {
+            val defferedUser = async(Dispatchers.IO) {
+                val cursor = guestHelper.queryAll()
+                MappingHelper.mapCursorToArrayList(cursor)
+            }
+            val guestData = defferedUser.await()
+            Log.d("NGECEK KELAS", guestData.toString())
+            if (!guestData.isNullOrEmpty()) {
+
+                listGuestAdapter.setData(guestData)
+
+                Log.d("BERHASIL DITEMUKAN", guestData.toString())
+            } else {
+                Log.d("Data KOSONG", "tidak ada")
+
+                showData()
+            }
+        }
+    }
+
+    private fun swipeRefresh() {
+        binding.swipeToRefresh.setOnRefreshListener {
+            binding.swipeToRefresh.isRefreshing = false
+            cacheData()
+        }
     }
 
     private fun showData() {
@@ -56,6 +100,7 @@ class GuestActivity : AppCompatActivity(), ListGuestAdapter.OnGuestClickCallback
                     binding.progressBar.visibility = View.GONE
                     binding.rvGuest.visibility = View.VISIBLE
                     listGuestAdapter.setData(response.body() as ArrayList<GuestItem>)
+                    insertData(response.body() as ArrayList<GuestItem>)
                 }
             }
 
@@ -64,6 +109,17 @@ class GuestActivity : AppCompatActivity(), ListGuestAdapter.OnGuestClickCallback
             }
 
         })
+    }
+
+    private fun insertData(body: ArrayList<GuestItem>) {
+        for (i in 0 until body.size){
+            val values = ContentValues()
+            values.put(DatabaseContract.GuestColumn.ID, body[i].id)
+            values.put(DatabaseContract.GuestColumn.NAME, body[i].name ?: "")
+            values.put(DatabaseContract.GuestColumn.BIRTHDATE, body[i].birthdate)
+
+            guestHelper.insert(values)
+        }
     }
 
     override fun onGuestClicked(data: GuestItem) {
@@ -118,6 +174,12 @@ class GuestActivity : AppCompatActivity(), ListGuestAdapter.OnGuestClickCallback
             onBackPressed()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val menuInflater = menuInflater
+        menuInflater.inflate(R.menu.menu, menu)
+        return super.onCreateOptionsMenu(menu)
     }
 
 

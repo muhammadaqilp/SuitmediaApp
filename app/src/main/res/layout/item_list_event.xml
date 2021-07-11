@@ -12,43 +12,77 @@
     android:layout_marginBottom="@dimen/item_margin_default"
     android:padding="@dimen/item_margin_default">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tvEventName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="@dimen/item_margin_default"
+            android:textStyle="bold"
+            android:text="@string/txtEventName"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@id/img_item_photo"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvEventDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/txtEventDate"
+            android:textColor="@color/gold"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@id/img_item_photo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvEventName" />
+
+        <TextView
+            android:id="@+id/tvEventTag"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textStyle="bold"
+            android:text="@string/txtEventTag"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:background="@color/tagList"
+            android:padding="4dp"
+            app:layout_constraintStart_toEndOf="@id/img_item_photo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvEventDate"/>
+
+        <TextView
+            android:id="@+id/tvLorem"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/lorem"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="@dimen/item_margin_default"
+            android:textSize="16sp"
+            android:maxLines="4"
+            android:ellipsize="end"
+            app:layout_constraintEnd_toStartOf="@+id/img_item_photo"
+            app:layout_constraintStart_toEndOf="@id/img_item_photo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvEventTag" />
 
         <ImageView
             android:id="@+id/img_item_photo"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginEnd="@dimen/item_margin_default"
-            tools:src="@tools:sample/avatars" />
+            android:layout_width="120dp"
+            android:layout_height="180dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@color/black" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/tvEventName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_size_medium"
-                android:textStyle="bold"
-                tools:text="@string/txtEventName" />
-
-            <TextView
-                android:id="@+id/tvEventDate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:maxLines="2"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_size_medium"
-                tools:text="@string/txtEventDate" />
-        </LinearLayout>
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

@@ -7,18 +7,20 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class GuestItem(
 	@SerializedName("birthdate")
-	val birthdate: String?,
+	var birthdate: String? = null,
 
 	@SerializedName("name")
-	val name: String?,
+	var name: String? = null,
 
 	@SerializedName("id")
-	val id: Int?
+	var id: Int? = 0
 ): Parcelable
 
 @Parcelize
 data class Event(
 	var name: String = "",
 	var date: String = "",
-	var image: Int = 0
+	var image: Int = 0,
+	var lat: String = "",
+	var lng: String = ""
 ): Parcelable

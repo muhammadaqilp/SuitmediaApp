@@ -1,5 +1,7 @@
 package com.example.suitmediaapp.adapter
 
+import android.graphics.text.LineBreaker.JUSTIFICATION_MODE_INTER_WORD
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,6 +39,9 @@ class ListEventAdapter(
 
                 binding.tvEventName.text = dataEvent.name
                 binding.tvEventDate.text = dataEvent.date
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    binding.tvLorem.justificationMode = JUSTIFICATION_MODE_INTER_WORD
+                }
 
                 setOnClickListener {
                     listener?.onItemClicked(dataEvent)

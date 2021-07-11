@@ -2,7 +2,9 @@ package com.example.suitmediaapp.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,6 +13,7 @@ import com.example.suitmediaapp.adapter.ListEventAdapter
 import com.example.suitmediaapp.data.model.Event
 import com.example.suitmediaapp.data.model.EventData
 import com.example.suitmediaapp.databinding.ActivityEventBinding
+import com.example.suitmediaapp.fragment.MapViewFragment
 
 class EventActivity : AppCompatActivity(), ListEventAdapter.OnItemClickCallback{
 
@@ -23,7 +26,7 @@ class EventActivity : AppCompatActivity(), ListEventAdapter.OnItemClickCallback{
         val view = binding.root
         setContentView(view)
 
-        setSupportActionBar(binding.detailToolbar)
+        setSupportActionBar(binding.toolbar)
         supportActionBar?.title = getString(R.string.eventToolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
@@ -51,6 +54,18 @@ class EventActivity : AppCompatActivity(), ListEventAdapter.OnItemClickCallback{
         if (item.itemId == android.R.id.home){
             onBackPressed()
         }
+        if (item.itemId == R.id.addmedia){
+            binding.containerMap.visibility = View.VISIBLE
+            var mapView = MapViewFragment()
+            supportFragmentManager.beginTransaction().add(R.id.containerMap, mapView)
+                .commit()
+        }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val menuInflater = menuInflater
+        menuInflater.inflate(R.menu.menu, menu)
+        return super.onCreateOptionsMenu(menu)
     }
 }
