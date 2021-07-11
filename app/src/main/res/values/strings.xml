@@ -2,11 +2,20 @@
     <string name="app_name">Suitmedia App</string>
     <string name="insert_name">Masukkan Nama</string>
     <string name="next">NEXT</string>
+    <string name="selesai">Selesai</string>
     <string name="namefirst">Nama : </string>
     <string name="nametxt">Joni Joni</string>
     <string name="txtEventName">Event Name</string>
     <string name="txtEventDate">Event Date</string>
+    <string name="txtEventTag">#EventTag</string>
     <string name="guestToolbar">Guest</string>
     <string name="eventToolbar">Event</string>
+    <string name="eventToolbarLoc">Event Location</string>
     <string name="checkPalindrome">Check Palindrome</string>
+    <string name="selamat_datang">Selamat Datang!</string>
+    <string name="tambah_gambar">Sertakan gambar profil Anda untuk melengkapi profil.</string>
+    <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
+    <string name="see_maps">See Maps View</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
